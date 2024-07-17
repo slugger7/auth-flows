@@ -21,7 +21,7 @@ app.get("/api/authenticated", (req, res) => {
 
       console.log({ username, password })
 
-      if (username.toLocaleLowerCase() === "kevin" && password.toLowerCase() === "admin") {
+      if (username.toLocaleLowerCase() === "admin" && password === "pass") {
         return res.status(200)
           .send("This string is protected by basic auth")
       }

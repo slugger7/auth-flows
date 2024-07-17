@@ -10,6 +10,8 @@
 
 ### JWT Auth
 
+https://www.digitalocean.com/community/tutorials/nodejs-jwt-expressjs
+
 ### Cookie Auth
 
 ### HTTP Only cookie

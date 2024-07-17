@@ -1,0 +1,13 @@
+@authToken = {{login.response.body.token}}
+# @name login
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+  "username": "kevin",
+  "password": "admin"
+}
+
+### Authenticated
+GET http://localhost:3000/api/authenticated
+Authorization: Bearer {{authToken}}

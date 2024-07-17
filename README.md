@@ -2,6 +2,8 @@
 
 ## Things I want to discuss
 
+### Authentication vs Authorization
+
 ### No Auth
 
 ### Basic Auth

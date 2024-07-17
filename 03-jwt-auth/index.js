@@ -13,10 +13,10 @@ app.get("/", (_, res) => {
 })
 
 app.post("/api/login", (req, res) => {
-  console.log({ body: req.body })
+  console.log({ url: req.url, body: req.body })
   const { username, password } = req.body
 
-  if (username?.toLowerCase() === "kevin" && password === "admin") {
+  if (username?.toLowerCase() === "admin" && password === "pass") {
     const token = generateAccessToken({ username, something: "else" })
 
     return res.json({ token })
@@ -26,7 +26,8 @@ app.post("/api/login", (req, res) => {
 })
 
 app.get("/api/authenticated", authenticateToken, (req, res) => {
-  res.json({ secured: "data" });
+  console.log("getting authenticated data")
+  res.json({ secured: "data", username: req.user.username });
 })
 
 app.listen(port, () => {

@@ -1,13 +1,21 @@
-@authToken = {{login.response.body.token}}
+@accessToken = {{login.response.body.accessToken}}
+@refreshToken = {{login.response.body.refreshToken}}
 # @name login
 POST http://localhost:3000/api/login
 Content-Type: application/json
 
 {
-  "username": "kevin",
-  "password": "admin"
+  "username": "admin",
+  "password": "pass"
 }
+
+
+### Refresh tokens
+# @name login
+POST http://localhost:3000/api/refresh-tokens
+Authorization: Bearer {{refreshToken}}
 
 ### Authenticated
 GET http://localhost:3000/api/authenticated
-Authorization: Bearer {{authToken}}
+Authorization: Bearer {{accessToken}}
+

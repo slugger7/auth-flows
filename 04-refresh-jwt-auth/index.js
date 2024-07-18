@@ -1,6 +1,8 @@
 const express = require('express')
 require('dotenv').config()
-const { generateTokenPair, authenticateToken } = require("./jwt")
+
+const { generateTokenPair, authenticateAccessToken, authenticateRefreshToken } = require("./jwt")
+const { createRefreshToken, createNewRefreshToken } = require("./db")
 
 const app = express()
 const port = 3000
@@ -18,16 +20,33 @@ app.post("/api/login", (req, res) => {
 
   if (username?.toLowerCase() === "admin" && password === "pass") {
 
-    return res.json(generateTokenPair({ username }, { tokenId: 1 }))
+    return createRefreshToken(username, (refreshToken) => {
+      console.log("Created refresh token", { refreshToken })
+      return res.json(generateTokenPair({ username }, refreshToken))
+    })
+
   }
 
   res.status(401).send("Not authenticated")
 })
 
-app.po
+app.post("/api/refresh-tokens", authenticateRefreshToken, (req, res) => {
+  console.log("Refreshing tokens")
 
-app.get("/api/authenticated", authenticateToken, (req, res) => {
-  console.log("getting authenticated data")
+  console.log(req.user)
+  createNewRefreshToken(req.user.id, (err, refreshToken) => {
+    if (err) {
+      console.log(err.message)
+      return res.status(401).send("Invalid token")
+    }
+
+    console.log({ refreshToken })
+    return res.json(generateTokenPair({ username: "admin" }, refreshToken))
+  })
+})
+
+app.get("/api/authenticated", authenticateAccessToken, (req, res) => {
+  console.log("Getting authenticated data")
   res.json({ secured: "data", username: req.user.username });
 })
 

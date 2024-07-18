@@ -8,8 +8,8 @@ const generateTokenPair = (accessTokenDetails, refreshTokenDetails) => ({
   refreshToken: jwt.sign(refreshTokenDetails, REFRESH_TOKEN_SECRET, { expiresIn: '60s' })
 })
 
-const authenticateToken = (req, res, next) => {
-  console.log("Authenticating token")
+const authenticateAccessToken = (req, res, next) => {
+  console.log("Authenticating access token")
   const authHeader = req.headers.authorization
   console.log("Auth header: ", authHeader)
 
@@ -35,7 +35,35 @@ const authenticateToken = (req, res, next) => {
   }
 }
 
+const authenticateRefreshToken = (req, res, next) => {
+  console.log("Authenticating refresh token")
+  const authHeader = req.headers.authorization
+  console.log("Auth header: ", authHeader)
+
+  if (authHeader) {
+    const [method, token] = authHeader.split(' ')
+
+    if (method.toLowerCase() !== "bearer" && token == null) {
+      return res.status(401).send("No token provided")
+    }
+
+    jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+      if (err) {
+        console.log(`JWT verification error: ${err}`)
+        return res.status(403).send('Could not verify token')
+      }
+
+      req.user = user
+
+      next()
+    })
+  } else {
+    return res.status(401).send('No authentication header provided')
+  }
+}
+
 module.exports = {
-  authenticateToken,
+  authenticateAccessToken,
+  authenticateRefreshToken,
   generateTokenPair
 }

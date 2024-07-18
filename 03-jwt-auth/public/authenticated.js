@@ -41,6 +41,11 @@ const fetchAuthenticatedData = async () => {
 
     if (!response.ok) {
       console.error("Something went wrong fetching the secret data")
+
+      if (response.status === 401) {
+        localStorage.clear()
+        return setLoggedOut()
+      }
     }
 
     const content = await response.json()

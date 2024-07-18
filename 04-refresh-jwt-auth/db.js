@@ -1,38 +1,41 @@
-const nedb = require('nedb')
+const nedb = require('nedb-promise')
+const util = require('util')
 
 let db = new nedb();
 
-const createRefreshToken = (username, callback) => {
-  db.insert({ username }, (err, newRefreshToken) => {
-    if (err) {
-      console.error(`Something went wrong creating a refresh token chain: ${err.message}`)
-    }
+// const insert = util.promisify(db.insert)
+const findOne = util.promisify(db.findOne)
+const update = util.promisify(db.update)
 
-    callback({ id: newRefreshToken._id })
-  })
+
+const createRefreshToken = async (username) => {
+  try {
+    const newRefreshToken = await db.insert({ username })
+    return { id: newRefreshToken._id }
+  } catch (err) {
+    console.error(`Something went wrong creating a refresh token chain: ${err.message}`)
+  }
 }
 
-const createNewRefreshToken = (tokenId, callback) => {
-  db.findOne({ _id: tokenId }, (findErr, currentToken) => {
-    if (findErr) {
-      console.log(`Something went wrong finding the token: ${findErr.message}`)
-    }
-
+const createNewRefreshToken = async (tokenId) => {
+  try {
+    const currentToken = await db.findOne({ _id: tokenId })
     console.log({ currentToken })
+
     if (!currentToken.used) {
-      db.insert({ username: currentToken.username, parent: currentToken._id }, (insertErr, newToken) => {
-        if (insertErr) {
-          console.error(`Could not create token from a token: ${insertErr.message}`)
+      try {
+        const newToken = await db.insert({ username: currentToken.username, parent: currentToken._id })
+
+        try {
+          await db.update({ _id: tokenId }, { $set: { used: true } }, {})
+
+          return { id: newToken._id }
+        } catch (err) {
+          console.error(`Something went wrong updating the old token: ${err.message}`)
         }
-
-        db.update({ _id: tokenId }, { $set: { used: true } }, {}, (updateErr, numUpdated) => {
-          if (updateErr) {
-            console.error(`Something went wrong updating the old token: ${updateErr.message}`)
-          }
-
-          callback(null, { id: newToken._id })
-        })
-      })
+      } catch (err) {
+        console.error(`Could not create token from a token: ${err.message}`)
+      }
     } else {
       console.log("Invalidating token chain")
       invalidateTokenChain(currentToken._id, (success) => {
@@ -40,36 +43,35 @@ const createNewRefreshToken = (tokenId, callback) => {
           console.error(`Something went wrong invalidating the chain`)
         }
       })
-      callback(new Error("Not authenticated"))
+      throw new Error("Not authenticated")
     }
-  })
+  } catch (err) {
+    console.log(`Something went wrong finding the token: ${err.message}`)
+  }
 }
 
-const invalidateTokenChain = (tokenId, callback) => {
-  db.findOne({ parent: tokenId }, (findErr, token) => {
-    if (findErr) {
-      console.error(`Something went wrong finding child: ${tokenId}, ${findErr.message}`)
-      callback(false)
-    }
+const invalidateTokenChain = async (tokenId) => {
+  try {
+    const token = await db.findOne({ parent: tokenId })
 
     console.log({ invalidatingToken: token })
-    if (!token) {
-      console.log("Invalidated token chain")
-      return callback(true)
-    }
 
-    db.update({ _id: token._id }, { $set: { used: true } }, {}, (updateErr) => {
-      if (updateErr) {
+    if (token) {
+      try {
+        await db.update({ _id: token._id }, { $set: { used: true } }, {})
+
+        invalidateTokenChain(token._id)
+      } catch (err) {
         console.error(`Something went wrong invalidating token ${token._id}, ${updateErr.message}`)
-        callback(false)
+
+        throw new Error("Update error")
       }
-
-      invalidateTokenChain(token._id, callback)
-    })
-  })
+    }
+  } catch (err) {
+    console.error(`Something went wrong finding child: ${tokenId}, ${findErr.message}`)
+    throw new Error("Could not find token")
+  }
 }
-
-
 
 module.exports = {
   createRefreshToken,

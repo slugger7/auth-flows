@@ -14,35 +14,39 @@ app.get("/", (_, res) => {
   res.redirect('index.html')
 })
 
-app.post("/api/login", (req, res) => {
+app.post("/api/login", async (req, res) => {
   console.log({ url: req.url, body: req.body })
   const { username, password } = req.body
 
   if (username?.toLowerCase() === "admin" && password === "pass") {
 
-    return createRefreshToken(username, (refreshToken) => {
-      console.log("Created refresh token", { refreshToken })
-      return res.json(generateTokenPair({ username }, refreshToken))
-    })
+    try {
+      const refreshToken = await createRefreshToken(username)
 
+      console.log("Created refresh token", { refreshToken })
+
+      return res.json(generateTokenPair({ username }, refreshToken))
+    } catch (err) {
+      console.error("Could not create refresh token")
+    }
   }
 
   res.status(401).send("Not authenticated")
 })
 
-app.post("/api/refresh-tokens", authenticateRefreshToken, (req, res) => {
-  console.log("Refreshing tokens")
+app.post("/api/refresh-tokens", authenticateRefreshToken, async (req, res) => {
+  console.log("Refreshing tokens", req.user)
 
-  console.log(req.user)
-  createNewRefreshToken(req.user.id, (err, refreshToken) => {
-    if (err) {
-      console.log(err.message)
-      return res.status(401).send("Invalid token")
-    }
+  try {
+    const refreshToken = await createNewRefreshToken(req.user.id)
 
     console.log({ refreshToken })
+
     return res.json(generateTokenPair({ username: "admin" }, refreshToken))
-  })
+  } catch (err) {
+    console.error(err.message)
+    return res.status(401).send("Invalid token")
+  }
 })
 
 app.get("/api/authenticated", authenticateAccessToken, (req, res) => {

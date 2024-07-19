@@ -74,3 +74,5 @@ if (localStorage.getItem("token")) {
 } else {
   setLoggedOut()
 }
+
+// TODO: create logout button and fetch

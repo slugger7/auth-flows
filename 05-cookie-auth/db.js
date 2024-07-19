@@ -2,7 +2,7 @@ const nedb = require('nedb-promise')
 
 const db = new nedb()
 
-const expirationTime = 5 * 1000
+const expirationTime = 10 * 1000
 
 const createToken = async (username) => {
   try {

@@ -68,7 +68,6 @@ const setLoggedOut = () => {
     <h4>Password</h4>
     <input id="password-input" type="password" />
     <button onclick="login()">Login</button>`
-  clearInterval(timer)
 }
 
 const setLoggedIn = () => {

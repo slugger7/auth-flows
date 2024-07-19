@@ -38,7 +38,7 @@ app.post("/api/login", async (req, res) => {
 
 app.get("/api/logout", async (req, res) => {
   console.log("Logging out")
-  const cookie = req.signedCookies[COOKIE_KEY]
+  const cookie = req.sessionId
   console.log({ cookie })
 
   await invalidateToken(cookie)
@@ -50,7 +50,7 @@ app.get("/api/logout", async (req, res) => {
 app.get("/api/authenticated", authenticateCookie, (req, res) => {
   console.log("We can see the authenticated data")
 
-  res.send({
+  res.json({
     secret: "something",
     balance: "$1,000,000,000"
   })

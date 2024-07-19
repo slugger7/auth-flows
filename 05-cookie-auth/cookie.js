@@ -15,6 +15,8 @@ const authenticateCookie = async (req, res, next) => {
       if (!token.invalid && token.exp > Date.now()) {
         console.log("Cookie is still valid")
 
+        req.sessionId = token._id
+
         return next()
       } else {
         console.log("Cookie has expired")

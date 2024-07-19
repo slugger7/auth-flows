@@ -25,7 +25,18 @@ const getToken = async (tokenId) => {
   }
 }
 
+const invalidateToken = async (tokenId) => {
+  try {
+    const result = await db.update({ _id: tokenId }, { $set: { invalid: true } }, {});
+
+    console.log("Rows updated: ", result)
+  } catch (err) {
+    console.log(`Colud not invalidate token: ${tokenId}, ${err.message}`)
+  }
+}
+
 module.exports = {
   createToken,
-  getToken
+  getToken,
+  invalidateToken
 }

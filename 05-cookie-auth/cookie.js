@@ -12,7 +12,7 @@ const authenticateCookie = async (req, res, next) => {
 
       console.log({ token })
 
-      if (token.exp > Date.now()) {
+      if (!token.invalid && token.exp > Date.now()) {
         console.log("Cookie is still valid")
 
         return next()

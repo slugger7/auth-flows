@@ -2,7 +2,7 @@ const express = require('express')
 const cookieparser = require('cookie-parser')
 require('dotenv').config()
 
-const { createToken } = require('./db')
+const { createToken, invalidateToken } = require('./db')
 const { authenticateCookie } = require('./cookie')
 
 const COOKIE_SECRET = process.env.COOKIE_SECRET
@@ -36,11 +36,15 @@ app.post("/api/login", async (req, res) => {
   res.status(401).send("Not authenticated")
 })
 
-app.get("/api/logout", (req, res) => {
+app.get("/api/logout", async (req, res) => {
   console.log("Logging out")
-  const cookies = req.signedCookies[COOKIE_KEY]
-  console.log({ cookies })
+  const cookie = req.signedCookies[COOKIE_KEY]
+  console.log({ cookie })
+
+  await invalidateToken(cookie)
+
   res.clearCookie(COOKIE_KEY)
+  res.sendStatus(200)
 })
 
 app.get("/api/authenticated", authenticateCookie, (req, res) => {

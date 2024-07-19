@@ -1,0 +1,2 @@
+### Create token
+POST http://localhost:8080/token

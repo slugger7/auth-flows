@@ -18,4 +18,7 @@ https://www.digitalocean.com/community/tutorials/nodejs-jwt-expressjs
 
 ### OAuth
 
+https://datatracker.ietf.org/doc/rfc6749/
+https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce
+
 ### API Key

@@ -1,0 +1,27 @@
+{
+  "name": "api-key-auth",
+  "version": "1.0.0",
+  "description": "example project of a project using api key authentication",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "watch": "nodemon --ignore 'public/*' index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slugger7/auth-flows.git"
+  },
+  "author": "Kevin Heritage",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/slugger7/auth-flows/issues"
+  },
+  "homepage": "https://github.com/slugger7/auth-flows#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "nedb-promise": "^2.0.1"
+  }
+}

@@ -1,0 +1,17 @@
+@key = {{apiKey.response.body.apiKey}}
+### Create api key
+# @name apiKey
+POST http://localhost:3000/api/create-token
+Content-Type: application/json
+
+{
+  "org": "adimn"
+}
+
+### Authenticated data
+GET http://localhost:3000/api/authenticated
+Api-Key: {{key}}
+
+### Invalidate token
+DELETE http://localhost:3000/api/invalidate-token
+Api-Key: {{key}}

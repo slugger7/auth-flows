@@ -1,12 +1,6 @@
 const nedb = require('nedb-promise')
-const util = require('util')
 
 let db = new nedb();
-
-// const insert = util.promisify(db.insert)
-const findOne = util.promisify(db.findOne)
-const update = util.promisify(db.update)
-
 
 const createRefreshToken = async (username) => {
   try {

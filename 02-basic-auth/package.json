@@ -4,7 +4,8 @@
   "description": "example of a project using basic authentication",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "watch": "nodemon --ignore 'public/*' index.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,8 @@
   "homepage": "https://github.com/slugger7/auth-flows#readme",
   "dependencies": {
     "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
   }
 }

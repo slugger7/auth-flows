@@ -1,9 +1,7 @@
 # HTTP Only Cookie Authentication
 
-- Managed by the browser and the server
-- Only sent to the server that issued the cookie
-- Can be seen by JavaScript (we can fix this later)
-- Can be encrypted or unencrypted
+- Same as normal cookie authentication
+- Javascript cant access the cookie though
 
 ## Instructions
 
@@ -12,3 +10,8 @@
 1. Login using username: admin password: pass
 1. Click Fetch authenticated Data
 1. Cookie will expire after 20 seconds (can be set in [.env](./.env))
+1. Run in browser console `getCookie()` (it will fail to get the cookie)
+
+## Notes
+
+- Add button to try and get cookie and info about cookie

@@ -21,7 +21,7 @@ const authenticateToken = (req, res, next) => {
     jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
       if (err) {
         console.log(`JWT verification error: ${err}`)
-        return res.status(403).send('Could not verify token')
+        return res.status(401).send('Could not verify token')
       }
 
       req.user = user

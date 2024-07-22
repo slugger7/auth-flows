@@ -4,6 +4,7 @@
   "description": "example of a project using jwt authentication",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "watch": "nodemon --ignore 'public/*' index.js"
   },
   "repository": {

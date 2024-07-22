@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken")
 
 const TOKEN_SECRET = process.env.TOKEN_SECRET
-console.log({ TOKEN_SECRET })
 const generateAccessToken = (details) => {
   return jwt.sign(details, TOKEN_SECRET, { expiresIn: '1800s' })
 }
@@ -24,7 +23,6 @@ const hashCodeVerifier = async (codeVerifier) => {
 const authenticateToken = (req, res, next) => {
   console.log("Authenticating token")
   const authHeader = req.headers.authorization
-  console.log("Auth header: ", authHeader)
 
   if (authHeader) {
     const [method, token] = authHeader.split(' ')
@@ -33,6 +31,7 @@ const authenticateToken = (req, res, next) => {
       return res.status(401).send("No token provided")
     }
 
+    // instead of sharing the secrte a JWK setup would be ideal
     jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
       if (err) {
         console.log(`JWT verification error: ${err}`)

@@ -2,11 +2,9 @@ const nedb = require('nedb-promise')
 
 const db = new nedb()
 
-const expirationTime = 5 * 1000
-
-const createToken = async (username) => {
+const createToken = async (username, expirationDate) => {
   try {
-    const newToken = await db.insert({ exp: Date.now() + (expirationTime), username })
+    const newToken = await db.insert({ exp: expirationDate, username })
 
     return newToken
   } catch (err) {

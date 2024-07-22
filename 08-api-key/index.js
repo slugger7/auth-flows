@@ -6,7 +6,6 @@ const { validateApiKey } = require('./api-key-auth')
 const app = express()
 const port = 3000
 
-app.use(express.static('public'))
 app.use(express.json())
 
 app.get("/", (_, res) => {

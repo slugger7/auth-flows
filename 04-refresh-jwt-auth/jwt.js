@@ -4,7 +4,7 @@ const TOKEN_SECRET = process.env.TOKEN_SECRET
 const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET
 
 const generateTokenPair = (accessTokenDetails, refreshTokenDetails) => ({
-  accessToken: jwt.sign(accessTokenDetails, TOKEN_SECRET, { expiresIn: '5s' }),
+  accessToken: jwt.sign(accessTokenDetails, TOKEN_SECRET, { expiresIn: '10s' }),
   refreshToken: jwt.sign(refreshTokenDetails, REFRESH_TOKEN_SECRET, { expiresIn: '60s' })
 })
 
@@ -23,7 +23,7 @@ const authenticateAccessToken = (req, res, next) => {
     jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
       if (err) {
         console.log(`JWT verification error: ${err}`)
-        return res.status(403).send('Could not verify token')
+        return res.status(401).send('Could not verify token')
       }
 
       req.user = user
@@ -50,7 +50,7 @@ const authenticateRefreshToken = (req, res, next) => {
     jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
       if (err) {
         console.log(`JWT verification error: ${err}`)
-        return res.status(403).send('Could not verify token')
+        return res.status(401).send('Could not verify token')
       }
 
       req.user = user

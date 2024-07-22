@@ -1,11 +1,11 @@
 const REFRESH_TOKEN = "refreshToken"
 const ACCESS_TOKEN = "accessToken"
 
-let timer = null
+var timer = null
 
 const setupRefresh = () => {
   console.log("Setting up interval")
-  timer = setInterval(() => refreshTokenPair(), 4 * 1000)
+  timer = setInterval(() => refreshTokenPair(), 8 * 1000)
 }
 
 const saveTokenPair = (accessToken, refreshToken) => {
@@ -30,7 +30,7 @@ const refreshTokenPair = async () => {
 
   if (!response.ok) {
     console.error("Could not refresh tokens", response.status)
-    if (response.status === 401 || response.status === 403) {
+    if (response.status === 401) {
       localStorage.clear()
       setLoggedOut()
     }
@@ -84,7 +84,7 @@ const fetchAuthenticatedData = async () => {
 
     if (!response.ok) {
       console.error("Something went wrong fetching the secret data", response.status)
-      if (response.status === 401 || response.status === 403) {
+      if (response.status === 401) {
         localStorage.clear()
         return setLoggedOut()
       }

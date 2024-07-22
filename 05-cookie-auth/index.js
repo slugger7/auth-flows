@@ -7,11 +7,9 @@ const { authenticateCookie } = require('./cookie')
 
 const COOKIE_SECRET = process.env.COOKIE_SECRET
 const COOKIE_KEY = process.env.COOKIE_KEY
+const COOKIE_LIFE = process.env.COOKIE_LIFE
 
-const cookieOptions = {
-  maxAge: 60 * 1000,
-  signed: true
-}
+const expirationTime = COOKIE_LIFE * 1000
 
 const app = express()
 const port = 3000
@@ -29,8 +27,15 @@ app.post("/api/login", async (req, res) => {
   const { username, password } = req.body
 
   if (username?.toLowerCase() === "admin" && password === "pass") {
-    const token = await createToken(username)
-    return res.cookie(COOKIE_KEY, token._id, cookieOptions).send("Ok")
+    const expirationDate = new Date(Date.now() + expirationTime)
+
+    const token = await createToken(username, expirationDate)
+
+    return res.cookie(COOKIE_KEY, token._id, {
+      expires: expirationDate,
+      signed: true,
+      sameSite: true
+    }).send("Ok")
   }
 
   res.status(401).send("Not authenticated")

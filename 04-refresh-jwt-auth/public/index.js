@@ -1,11 +1,11 @@
 const REFRESH_TOKEN = "refreshToken"
 const ACCESS_TOKEN = "accessToken"
 
-var timer = null
+let timer
 
 const setupRefresh = () => {
   console.log("Setting up interval")
-  timer = setInterval(() => refreshTokenPair(), 8 * 1000)
+  timer = setInterval(refreshTokenPair, 8 * 1000)
 }
 
 const saveTokenPair = (accessToken, refreshToken) => {

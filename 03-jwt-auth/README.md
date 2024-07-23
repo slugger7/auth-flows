@@ -30,6 +30,7 @@ Display a message or redirect user to an authorized part of the system
 
 - Create logout button
 - Decode JWT on frontend
+- Create sequence diagram
 
 ## References
 

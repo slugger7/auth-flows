@@ -19,6 +19,7 @@
 - Add logout button
 - In order to truly have distributed trust JWK should be used (public key authentication)
 - To prevent token expiry join the refresh token flow with this flow
+- Create sequence diagram
 
 ## References
 

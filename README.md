@@ -8,8 +8,8 @@ These examples are basic to convey the concept and need a lot more work to actua
 
 ## Who am I
 
-- Oupa Kevin Bacon
+- Oupa Kevin Bacon 🥓
 - Kevin Heritage
-- Living in stroopwafel en tulpen land
-- 6+ years with Entelct
+- Living in stroopwafel en tulpen land 🇳🇱
+- 6+ years with Entelect
 - Client: Rabobank - Rabo Labs

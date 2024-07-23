@@ -1,24 +1,15 @@
 # Auth flows
 
-## Things I want to discuss
+## Disclaimer
 
-### Authentication vs Authorization
+This is a talk and demo around multiple different authentication flows.
 
-### No Auth
+These examples are basic to convey the concept and need a lot more work to actually be used in a production environment.
 
-### Basic Auth
+## Who am I
 
-### JWT Auth
-
-https://www.digitalocean.com/community/tutorials/nodejs-jwt-expressjs
-
-### Cookie Auth
-
-### HTTP Only cookie
-
-### OAuth
-
-https://datatracker.ietf.org/doc/rfc6749/
-https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce
-
-### API Key
+- Oupa Kevin Bacon
+- Kevin Heritage
+- Living in stroopwafel en tulpen land
+- 6+ years with Entelct
+- Client: Rabobank - Rabo Labs

@@ -30,3 +30,7 @@ Display a message or redirect user to an authorized part of the system
 
 - Create logout button
 - Decode JWT on frontend
+
+## References
+
+- [Guide](https://www.digitalocean.com/community/tutorials/nodejs-jwt-expressjs)

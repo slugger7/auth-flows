@@ -19,3 +19,8 @@
 - Add logout button
 - In order to truly have distributed trust JWK should be used (public key authentication)
 - To prevent token expiry join the refresh token flow with this flow
+
+## References
+
+- [RFC 6749](https://datatracker.ietf.org/doc/rfc6749/)
+- [Auth0 PKCE](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce)

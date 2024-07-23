@@ -5,5 +5,6 @@
 
 ## Instructions
 
+1. `npm i`
 1. `npm run start`
 1. In browser head to the [app](http://localhost:3000)

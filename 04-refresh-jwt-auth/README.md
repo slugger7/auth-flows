@@ -9,6 +9,7 @@
 
 ## Instructions
 
+1. `npm i`
 1. `npm run start`
 1. In browser head to the [app](http://localhost:3000)
 1. Login using username: admin password: pass
@@ -17,7 +18,7 @@
 1. Wait for a few refresh cycles (more than 8s)
 1. Inject saved refresh token
 
-## Notes:
+## Notes
 
 - Create logout button
 - Clear interval not working

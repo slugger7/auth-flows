@@ -20,11 +20,13 @@ Display a message or redirect user to an authorized part of the system
 
 ## Instructions
 
+1. `npm i`
 1. `npm run start`
 1. In browser head to the [app](http://localhost:3000)
 1. Login using username: admin password: pass
 1. Click fetch authenticated Data
 
-## Notes:
+## Notes
 
 - Create logout button
+- Decode JWT on frontend

@@ -5,6 +5,7 @@
 
 ## Instructions
 
+1. `npm i`
 1. `npm run start`
 1. In browser head to the [app](http://localhost:3000)
 1. Login using username: admin password: pass

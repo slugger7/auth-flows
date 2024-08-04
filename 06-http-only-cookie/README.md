@@ -12,7 +12,3 @@
 1. Click Fetch authenticated Data
 1. Cookie will expire after 20 seconds (can be set in [.env](./.env))
 1. Run in browser console `getCookie()` (it will fail to get the cookie)
-
-## Notes
-
-- Add button to try and get cookie and info about cookie

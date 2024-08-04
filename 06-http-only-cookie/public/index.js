@@ -57,7 +57,8 @@ const fetchAuthenticatedData = async () => {
 
   document.getElementById('active-area').innerHTML = `<pre>${JSON.stringify(content, null, 2)}</pre>
     <button onclick="fetchAuthenticatedData()">Fetch authenticated Data</button>
-    <button onclick="logout()">Logout</button>`
+    <button onclick="logout()">Logout</button>
+    <button onclick="getCookie()">Cookie info</button>`
 }
 
 const setLoggedOut = () => {
@@ -73,7 +74,8 @@ const setLoggedIn = () => {
   const parent = document.getElementById('active-area')
   parent.innerHTML = `<p>Waiting for secret data</p>
     <button onclick="fetchAuthenticatedData()">Fetch authenticated Data</button>
-    <button onclick="logout()">Logout</button>`
+    <button onclick="logout()">Logout</button>
+    <button onclick="getCookie()">Cookie info</button>`
 }
 
 const getLoggedInStatus = async () => {

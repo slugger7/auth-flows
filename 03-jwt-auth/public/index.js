@@ -28,6 +28,12 @@ const login = async () => {
   setLoggedIn()
 }
 
+const logout = () => {
+  localStorage.clear()
+
+  setLoggedOut()
+}
+
 const fetchAuthenticatedData = async () => {
   const token = localStorage.getItem("token")
 
@@ -54,10 +60,28 @@ const fetchAuthenticatedData = async () => {
   }
 }
 
+const decode = () => {
+  const token = localStorage.getItem("token")
+  const [headerBase64, paylodBase64, signatureBase64] = token.split(".")
+
+  const header = atob(headerBase64)
+  const paylod = atob(paylodBase64)
+  const signature = atob(signatureBase64)
+
+  //console.log({ header, paylod, signature })
+  console.log({
+    header: JSON.parse(header),
+    paylod: JSON.parse(paylod),
+    signature: signature
+  })
+}
+
 const setLoggedIn = () => {
   const parent = document.getElementById('active-area')
   parent.innerHTML = `<p>Waiting for secret data</p>
-    <button onclick="fetchAuthenticatedData()">Fetch authenticated Data</button>`
+    <button onclick="fetchAuthenticatedData()">Fetch authenticated Data</button>
+    <button onclick="decode()">Decode</button>
+    <button onclick="logout()">Logout</button>`
 }
 
 const setLoggedOut = () => {

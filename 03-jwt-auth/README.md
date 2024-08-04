@@ -28,8 +28,6 @@ Display a message or redirect user to an authorized part of the system
 
 ## Notes
 
-- Create logout button
-- Decode JWT on frontend
 - Create sequence diagram
 
 ## References

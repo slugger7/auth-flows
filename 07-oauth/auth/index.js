@@ -23,12 +23,12 @@ const login = async () => {
     console.log({ responseData })
 
     const urlParams = new URLSearchParams(window.location.search)
-    const redirect = atob(urlParams.get("redirect"))
+    const redirect = urlParams.get("redirect")
 
     console.log({ redirect })
 
     window.location.href = `${redirect}?authorizationCode=${responseData.authorizationCode}`
   } catch (err) {
-    console.error(`Could not log in`);
+    console.error(`Could not log in`, err.message);
   }
 }

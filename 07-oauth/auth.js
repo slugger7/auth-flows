@@ -22,7 +22,7 @@ app.get("/api/authorize", async (req, res) => {
 
   await storeChallenge(challenge)
 
-  res.redirect(`/?redirect=${redirect}`)
+  res.redirect(`/?redirect=${encodeURIComponent(redirect)}`)
 })
 
 app.post("/api/login", async (req, res) => {

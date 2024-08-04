@@ -17,7 +17,13 @@ const login = async () => {
 
   console.log({ code: codeVerifier, hashHex: codeChallenge })
 
-  window.location.href = `http://localhost:8080/api/authorize?challenge=${codeChallenge}&redirect=${btoa("http://localhost:3000/api/auth")}`
+  window.location.href = `http://localhost:8080/api/authorize?challenge=${codeChallenge}&redirect=${encodeURIComponent("http://localhost:3000/api/auth")}`
+}
+
+const logout = () => {
+  localStorage.clear()
+
+  setLoggedOut()
 }
 
 const fetchAuthenticatedData = async () => {
@@ -78,7 +84,8 @@ const exchangeAuthorizationCode = async (authorizationCode) => {
 const setLoggedIn = () => {
   document.getElementById("loading").innerHTML = `<p>Authenticated</p>
       <pre id="data"></pre>
-      <button onclick="fetchAuthenticatedData()">Fetch authenticated data</button>`
+      <button onclick="fetchAuthenticatedData()">Fetch authenticated data</button>
+      <button onclick="logout()">Logout</button>`
 }
 
 const setLoggedOut = () => {
@@ -90,8 +97,6 @@ if (localStorage.getItem("accessToken")) {
 } else {
   setLoggedOut()
 }
-
-
 
 const handleAuthorizationCode = async () => {
   const urlParams = new URLSearchParams(window.location.search)

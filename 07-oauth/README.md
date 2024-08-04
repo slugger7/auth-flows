@@ -14,11 +14,14 @@
 1. After successful login will be redirected to [app](http://localhost:3000)
 1. On redirect a token will be requested and you can click Fetch authenticated data
 
+## Sequence
+
+![OAuth PKCE Flow](./07-oauth-sequence.drawio.png)
+
 ## Notes
 
 - In order to truly have distributed trust JWK should be used (public key authentication)
 - To prevent token expiry join the refresh token flow with this flow
-- Create sequence diagram
 
 ## References
 

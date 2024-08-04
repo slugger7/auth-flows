@@ -69,5 +69,6 @@ const invalidateTokenChain = async (tokenId) => {
 
 module.exports = {
   createRefreshToken,
-  createNewRefreshToken
+  createNewRefreshToken,
+  invalidateTokenChain
 }

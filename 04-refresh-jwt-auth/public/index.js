@@ -71,6 +71,19 @@ const login = async () => {
   setLoggedIn()
 }
 
+const logout = async () => {
+  const token = localStorage.getItem(ACCESS_TOKEN)
+
+  const headers = new Headers()
+  headers.append("Authorization", `Bearer ${token}`)
+
+  await fetch("/api/logout", { headers })
+
+  localStorage.clear()
+
+  setLoggedOut()
+}
+
 const fetchAuthenticatedData = async () => {
   const token = localStorage.getItem(ACCESS_TOKEN)
 
@@ -100,7 +113,8 @@ const fetchAuthenticatedData = async () => {
 const setLoggedIn = () => {
   const parent = document.getElementById('active-area')
   parent.innerHTML = `<p>Waiting for secret data</p>
-    <button onclick="fetchAuthenticatedData()">Fetch authenticated Data</button>`
+    <button onclick="fetchAuthenticatedData()">Fetch authenticated Data</button>
+    <button onclick="logout()">Logout</button>`
 
   setupRefresh()
 }

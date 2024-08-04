@@ -2,7 +2,7 @@ const express = require('express')
 require('dotenv').config()
 
 const { generateTokenPair, authenticateAccessToken, authenticateRefreshToken } = require("./jwt")
-const { createRefreshToken, createNewRefreshToken } = require("./db")
+const { createRefreshToken, createNewRefreshToken, invalidateTokenChain } = require("./db")
 
 const app = express()
 const port = 3000
@@ -32,6 +32,14 @@ app.post("/api/login", async (req, res) => {
   }
 
   res.status(401).send("Not authenticated")
+})
+
+app.get("/api/logout", authenticateRefreshToken, async (req, res) => {
+  console.log("Logging out ", req.user.id)
+
+  await invalidateTokenChain(req.user.id)
+
+  res.sendStatus(200)
 })
 
 app.post("/api/refresh-tokens", authenticateRefreshToken, async (req, res) => {

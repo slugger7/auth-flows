@@ -20,6 +20,5 @@
 
 ## Notes
 
-- Create logout button
 - Clear interval not working
 - Create sequence diagram

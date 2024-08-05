@@ -11,5 +11,5 @@ These examples are basic to convey the concept and need a lot more work to actua
 - Oupa Kevin Bacon 🥓
 - Kevin Heritage
 - Living in stroopwafel en tulpen land 🇳🇱
-- 6+ years with Entelect and still cant clear interval
+- 6+ years with Entelect ~~and still cant clear interval~~ nvm figured it out
 - Client: Rabobank - Rabo Labs

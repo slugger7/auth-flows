@@ -4,8 +4,9 @@ const ACCESS_TOKEN = "accessToken"
 let timer
 
 const setupRefresh = () => {
-  console.log("Setting up interval")
+  clearInterval(timer)
   timer = setInterval(refreshTokenPair, 8 * 1000)
+  console.log("Setting timer", {timer})
 }
 
 const saveTokenPair = (accessToken, refreshToken) => {
@@ -66,8 +67,6 @@ const login = async () => {
   // think carefully where you store these tokens
   saveTokenPair(accessToken, refreshToken)
 
-  setupRefresh()
-
   setLoggedIn()
 }
 
@@ -126,6 +125,8 @@ const setLoggedOut = () => {
     <h4>Password</h4>
     <input id="password-input" type="password" />
     <button onclick="login()">Login</button>`
+
+  console.log("Clearing interval", {timer})
   clearInterval(timer)
 }
 

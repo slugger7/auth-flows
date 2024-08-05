@@ -1,0 +1,24 @@
+@codeChallenge = 67f25b4202a68ab693f0de06cfdee080db2f4f993607a47ee068626b59966e07
+@codeVerifier = f6c1e971-d76b-4962-90d9-190f99e738aa
+### Authorize
+GET http://localhost:8080?challenge={{codeChallenge}}
+
+### Login
+@authorizationCode = {{login.response.body.authorizationCode}}
+# @name login
+POST http://localhost:8080/api/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "pass"
+}
+
+### Authenticate
+POST http://localhost:8080/api/authenticate
+Content-Type: application/json
+
+{
+    "authorizationCode": "{{authorizationCode}}",
+    "codeVerifier": "{{codeVerifier}}"
+}

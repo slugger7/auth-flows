@@ -13,7 +13,3 @@ These examples are basic to convey the concept and need a lot more work to actua
 - Living in stroopwafel en tulpen land 🇳🇱
 - 6+ years with Entelect and still cant clear interval
 - Client: Rabobank - Rabo Labs
-
-## Notes
-
-- When to use which authentication method

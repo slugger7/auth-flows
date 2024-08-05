@@ -4,6 +4,14 @@
 - What you have
 - Protect it
 
+## What is a JWT
+
+- [JWT.io](https://jwt.io)
+- Signed token
+- Information in it is public
+- Generally some identification information
+- Can add almost anything to it
+
 ## Authentication vs Authorization
 
 ### Authentication: 401
@@ -25,13 +33,6 @@ Display a message or redirect user to an authorized part of the system
 1. In browser head to the [app](http://localhost:3000)
 1. Login using username: admin password: pass
 1. Click fetch authenticated Data
-
-## Notes
-
-- Create sequence diagram
-- What is a jwt
-- What is stored in a jwt
-- Go through the Authentication vs Authorization
 
 ## References
 

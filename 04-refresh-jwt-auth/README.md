@@ -22,3 +22,5 @@
 
 - Clear interval not working
 - Create sequence diagram
+- Check if libraries can refresh token for you
+- Use library to make life easier

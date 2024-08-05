@@ -13,3 +13,7 @@
 1. Login using username: admin password: pass
 1. Click Fetch authenticated Data
 1. Cookie will expire after 20 seconds (can be set in [.env](./.env))
+
+## Notes
+
+- Opt in to cookies banners and such

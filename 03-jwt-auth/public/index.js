@@ -68,7 +68,6 @@ const decode = () => {
   const paylod = atob(paylodBase64)
   const signature = atob(signatureBase64)
 
-  //console.log({ header, paylod, signature })
   console.log({
     header: JSON.parse(header),
     paylod: JSON.parse(paylod),
@@ -98,5 +97,3 @@ if (localStorage.getItem("token")) {
 } else {
   setLoggedOut()
 }
-
-// TODO: create logout button and fetch
